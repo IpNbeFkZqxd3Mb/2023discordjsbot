@@ -4,7 +4,8 @@
   "description": "discordbottest",
   "main": "Bot.js",
   "scripts": {
-    "test": "start"
+    "test": "start",
+    "start":"node ./src/bot.js"
   },
   "author": "Cherinas",
   "license": "ISC",
