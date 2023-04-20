@@ -1,7 +1,7 @@
-const { Events , Webhook , Message , EmbedBuilder } = require('discord.js');
-const dotenv = require('dotenv');
+import { Events, Webhook, Message, EmbedBuilder } from 'discord.js';
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 module.exports = {
   name: 'messageCreate',
@@ -27,7 +27,7 @@ module.exports = {
     const content = `**${message.author.tag}** 在 <#${message.channel.id}> 說: \n${message.content}`;
 
     // 檢查消息中的附件
-    const attachments = message.attachments.map(attachment => {
+    const attachments = message.attachments.map((attachment) => {
       return { attachment: attachment.url, name: attachment.name };
     });
 
