@@ -3,6 +3,7 @@ import * as DevTest from './DevTest';
 import * as User from './User';
 import * as Guild from './Guild';
 import * as BotInteractions from './BotInteractions';
+import * as VoiceChannel from './VoiceChannel';
 import { ICOMMAND } from '../../utils/interface/IdiscordBotCommads';
 
 const discordCommandArray: ICOMMAND[] = [
@@ -11,6 +12,8 @@ const discordCommandArray: ICOMMAND[] = [
   User.getUserStatus,
   Guild.status,
   BotInteractions.dice,
+  VoiceChannel.joinVC,
+  VoiceChannel.kickVC,
 ];
 
 export const findCommand = (commandName: string): ICOMMAND | null => {
