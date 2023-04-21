@@ -22,7 +22,6 @@ export const joinVC = {
   data: new SlashCommandBuilder().setName('joinvc').setDescription('讓機器人加入語音頻道。'),
   async execute(interaction: ChatInputCommandInteraction) {
     let member = interaction.member as GuildMember;
-    console.log(member.voice);
     if (!member.voice.channel) {
       return interaction.reply({ content: '你必須加入語音頻道才能使用此指令' /*, ephemeral: true*/ });
     }
