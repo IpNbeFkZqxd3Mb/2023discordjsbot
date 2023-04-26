@@ -24,4 +24,4 @@ const run = async () => {
   await client.login(process.env.DISCORD_LOGIN_TOKEN);
 };
 
-export { run };
+export { run, client };

@@ -1,5 +1,6 @@
 import { Client, Events, Message, Channel, DMChannel, TextChannel, CategoryChannel } from 'discord.js';
 import { IEVENT } from '../../utils/interface/IdiscordBotEvent';
+import * as CrossChannelService from '../../services/CrossChannelService';
 
 const getCrossServerTalkList = async (): Promise<string[]> => {
   //模擬抓取資料庫
@@ -14,13 +15,17 @@ export const messageCreate: IEVENT = {
   async execute(message: Message) {
     if (message.author.bot) return;
 
-    let crossServerTalkList = await getCrossServerTalkList();
-    if (!crossServerTalkList.includes(message.channel.id)) {
+    let crossServerTalkList = await CrossChannelService.getAllCrossChannel();
+    if (
+      !crossServerTalkList.find((e) => {
+        return e.channelId === message.channel.id;
+      })
+    ) {
       return;
     }
-    for (let publishChannelId of crossServerTalkList) {
-      const publishChannel: Channel | null = await message.client.channels.fetch(publishChannelId);
-      if (!publishChannel || publishChannelId === message.channel.id) {
+    for (let ChannelData of crossServerTalkList) {
+      const publishChannel: Channel | null = await message.client.channels.fetch(ChannelData.channelId);
+      if (!publishChannel || ChannelData.channelId === message.channel.id) {
         continue;
       }
       const content = `**${message.author.tag}** 在 <#${message.channel.id}> 說: \n${message.content}`;
